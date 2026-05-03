@@ -1,0 +1,21 @@
+{
+  "name": "college-attendance-server",
+  "version": "1.0.0",
+  "description": "College Attendance System Backend",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "exceljs": "^4.4.0",
+    "jsonwebtoken": "^9.0.2",
+    "sql.js": "^1.10.3",
+    "socket.io": "^4.7.2",
+    "uuid": "^9.0.1"
+  }
+}
