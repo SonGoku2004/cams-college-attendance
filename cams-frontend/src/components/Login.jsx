@@ -14,6 +14,28 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    
+    // Demo mode - works without backend
+    const demoUsers = {
+      'test@cams.com': { id: 1, email: 'test@cams.com', role: 'hod', firstName: 'Admin', lastName: 'User', password: 'password123' },
+      'teacher@cams.com': { id: 2, email: 'teacher@cams.com', role: 'teacher', firstName: 'John', lastName: 'Smith', password: 'password123' },
+      'student@cams.com': { id: 3, email: 'student@cams.com', role: 'student', firstName: 'Jane', lastName: 'Doe', password: 'password123' }
+    };
+    
+    const demoUser = demoUsers[email.toLowerCase()];
+    if (demoUser && password === demoUser.password) {
+      localStorage.setItem('token', 'demo-token-' + Date.now());
+      localStorage.setItem('user', JSON.stringify(demoUser));
+      switch(demoUser.role) {
+        case 'student': navigate('/student'); break;
+        case 'teacher': navigate('/teacher'); break;
+        case 'hod': navigate('/hod'); break;
+        default: navigate('/login');
+      }
+      setLoading(false);
+      return;
+    }
+    
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
         email,
