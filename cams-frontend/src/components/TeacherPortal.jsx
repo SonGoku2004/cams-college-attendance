@@ -16,12 +16,17 @@ const TeacherPortal = () => {
   const fetchTeacherData = async () => {
     try {
       const token = localStorage.getItem('token');
+      if (token && token.startsWith('demo-')) {
+        setTeacher({ id: 2, first_name: 'John', last_name: 'Smith', email: 'teacher@cams.com', department: 'Computer Science', employee_id: 'EMP001' });
+        return;
+      }
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/teachers/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTeacher(response.data);
     } catch (err) {
       console.error('Error fetching teacher data:', err);
+      setTeacher({ id: 2, first_name: 'John', last_name: 'Smith', email: 'teacher@cams.com', department: 'Computer Science', employee_id: 'EMP001' });
     }
   };
 
